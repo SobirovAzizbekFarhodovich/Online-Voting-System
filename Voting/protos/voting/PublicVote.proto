@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+option go_package = "genproto/";
+
+package voting;
+
+import "Election.proto";
+
+service PublicVoteService{
+
+    rpc CreatePublicVote(CreatePublicVoteReq) returns (PublicVote_Void);
+    rpc GetAllPublicVote(PublicVote_Void) returns (GetPublicVoteResponse);
+    rpc GetByIdPublicVote(GetPublicVoteRequest) returns (PublicVote);
+    rpc UpdatePublicVote(UpdatePublicVoteRequest) returns (PublicVote_Void);
+    rpc DeletePublicVote(DeletePublicVoteRequest) returns (PublicVote_Void);
+
+
+}
+
+
+
+
+
+message CreatePublicVoteReq {
+    string id = 1;
+    string election_id = 2;
+    string public_id = 3;
+}
+
+message PublicVote {
+    string id = 1;
+    Election election_id = 2;
+    string public_id = 3;
+    
+}
+
+
+message PublicVote_Void{}
+
+
+message GetPublicVoteRequest {
+    string id = 1;
+}
+
+message GetPublicVoteResponse {
+    repeated PublicVote public_vote = 1;
+}
+
+message UpdatePublicVoteRequest {
+    PublicVote public_vote = 1;
+}
+
+
+message DeletePublicVoteRequest {
+    string id = 1;
+}
+

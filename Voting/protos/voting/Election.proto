@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+option go_package = "genproto/";
+
+package voting;
+
+// Service definition for Election CRUD operations
+service ElectionService {
+    rpc CreateElection (CreateElectionRequest) returns (Election_Void);
+    rpc GetAllElections(Election_Void) returns (GetAllElectionsResponse);
+    rpc GetByIdElection (GetElectionRequest) returns (GetElectionResponse);
+    rpc UpdateElection (UpdateElectionRequest) returns (Election_Void);
+    rpc DeleteElection (DeleteElectionRequest) returns (Election_Void);
+}
+
+// Message definitions
+
+message Election {
+    string id = 1;
+    string name = 2;
+    string date = 3;
+}
+message Election_Void{}
+
+// Create
+message CreateElectionRequest {
+    Election election = 1;
+}
+
+
+// Get
+message GetElectionRequest {
+    string id = 1;
+}
+
+message GetAllElectionsResponse {
+    repeated Election elections  = 1;
+}
+
+
+message GetElectionResponse {
+    Election election = 1;
+}
+
+// Update
+message UpdateElectionRequest {
+    Election election = 1;
+}
+
+
+// Delete
+message DeleteElectionRequest {
+    string id = 1;
+}
+

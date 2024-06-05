@@ -1,0 +1,65 @@
+syntax = "proto3";
+
+option go_package = "genproto/";
+
+package voting;
+
+import "Election.proto";
+
+// Service definition for Candidate CRUD operations
+service CandidateService {
+    rpc CreateCandidate (CreateCandidateRequest) returns (Candidate_Void);
+    rpc GetAllCandidates (Candidate_Void) returns (GetAllCandidatesResponse);
+    rpc GetByIdCandidate (GetByIdCandidateRequest) returns (GetByIdCandidateResponse);
+    rpc UpdateCandidate (UpdateCandidateRequest) returns (Candidate_Void);
+    rpc DeleteCandidate (DeleteCandidateRequest) returns (Candidate_Void);
+}
+
+message CreateCandidateRequest{
+    string id = 1;
+    string election_id = 2;
+    string party_id = 3;
+    string public_id = 4;
+
+}
+
+message Candidate {
+    string id = 1;
+    Election election_id = 2;
+    string party_id = 3;
+    string public_id = 4;
+}
+
+message Candidate_Void {}
+
+// Create
+
+message CreateCandidateResponse {
+    string id = 1;
+}
+
+// GetAll
+message GetAllCandidatesResponse {
+    repeated Candidate candidates = 1;
+}
+
+// GetById
+message GetByIdCandidateRequest {
+    string id = 1;
+}
+
+message GetByIdCandidateResponse {
+    Candidate candidate = 1;
+}
+
+// Update
+message UpdateCandidateRequest {
+    Candidate candidate = 1;
+}
+
+// Delete
+message DeleteCandidateRequest {
+    string id = 1;
+}
+
+

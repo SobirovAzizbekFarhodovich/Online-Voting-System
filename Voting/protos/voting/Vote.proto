@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+option go_package = "genproto/";
+
+package voting;
+
+
+
+// Message definitions
+service VoteService {
+    rpc CreateVote (Vote) returns (Vote_Void);
+    rpc GetAllVote (Vote_Void) returns (GetAllVotes);
+    rpc GetByIdVote (GetVoteRequest) returns (Vote);
+    rpc UpdateVote (UpdateVoteRequest) returns (Vote_Void);
+    rpc DeleteVote (DeleteVoteRequest) returns (Vote_Void);
+}
+
+
+message Vote {
+    string id = 1;
+    string candidate_id = 2;
+}
+
+message GetAll {
+    string id = 1;
+    string candidate_id = 2;
+}
+
+message GetAllVotes{
+    repeated GetAll votes = 1;
+}
+
+
+message Vote_Void{}
+// Create
+message CreateVoteRequest {
+    Vote vote = 1;
+}
+
+message CreateResponse {
+    string id = 1;
+}
+
+// Get
+message GetVoteRequest {
+    string id = 1;
+}
+
+
+// Update
+message UpdateVoteRequest {
+    Vote vote = 1;
+}
+
+
+
+// Delete
+message DeleteVoteRequest {
+    string id = 1;
+}
+
+
